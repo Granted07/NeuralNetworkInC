@@ -1,0 +1,30 @@
+# CLion
+.idea/
+
+# CMake and Ninja build output
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+build.ninja
+.ninja_deps
+.ninja_log
+compile_commands.json
+
+# CMake test output
+Testing/
+
+# C/C++ compiler and linker artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.out
+
+# Generated dependency and debug files
+*.d
+*.pdb
+*.ilk

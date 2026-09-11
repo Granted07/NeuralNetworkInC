@@ -1,0 +1,8 @@
+//
+// Created by anjis on 12-09-2026.
+//
+
+#ifndef NEURALNETWORKINC_LAYER_H
+#define NEURALNETWORKINC_LAYER_H
+
+#endif //NEURALNETWORKINC_LAYER_H
