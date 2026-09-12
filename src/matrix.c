@@ -31,6 +31,7 @@ Matrix *create_matrix(const int rows, const int cols) {
     }
     return m;
 }
+
 void free_matrix(Matrix *m) {
     for (int i = 0; i < m->rows; i++) {
         free(m->matrix[i]);
@@ -48,6 +49,16 @@ void matrix_set(Matrix *m, int i, int j, double value) {
 }
 
 //Core ops
+Matrix* copy_matrix(const Matrix *m) {
+    Matrix *m1 = create_matrix(m->rows, m->cols);
+    for (int i = 0; i < m->rows; i++) {
+        for (int j = 0; j < m->cols; j++) {
+            m1->matrix[i][j] = m->matrix[i][j];
+        }
+    }
+    return m1;
+}
+
 Matrix* add_matrix(const Matrix *m1, const Matrix *m2) {
     Matrix *m = create_matrix(m1->rows, m1->cols);
     for (int i = 0; i < m->rows; i++) {
@@ -57,6 +68,7 @@ Matrix* add_matrix(const Matrix *m1, const Matrix *m2) {
     }
     return m;
 }
+
 Matrix* multi_matrix(const Matrix *m1, const Matrix *m2) {
     assert(m1->cols == m2->rows);
     Matrix *m = create_matrix(m1->rows, m2->cols);
@@ -70,6 +82,7 @@ Matrix* multi_matrix(const Matrix *m1, const Matrix *m2) {
     }
     return m;
 }
+
 Matrix* transpose_matrix(const Matrix *m) {
     Matrix *m1 = create_matrix(m->cols, m->rows);
     for (int i = 0; i < m->rows; i++) {
@@ -100,6 +113,7 @@ void matrix_print(const Matrix *m) {
         printf("\n");
     }
 }
+
 void matrix_fill_random(Matrix *m, const double min, const double max) {
     for (int i = 0; i < m->rows; i++) {
         for (int j = 0; j < m->cols; j++) {

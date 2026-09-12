@@ -20,6 +20,7 @@ double matrix_get(const Matrix *m, int i, int j);
 void matrix_set(Matrix *m, int i, int j, double value);
 
 // Core ops
+Matrix *copy_matrix(const Matrix *m);
 Matrix* add_matrix(const Matrix *m1, const Matrix *m2);
 Matrix* multi_matrix(const Matrix *m1, const Matrix *m2);
 Matrix* transpose_matrix(const Matrix *m);
