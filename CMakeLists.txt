@@ -12,7 +12,12 @@ add_library(nncore STATIC ${CORE_SOURCES}
         src/activation.c
         include/activation.h
         src/layer.c
-        include/layer.h)
+        include/layer.h
+        src/network.c
+        include/network.h
+        include/network.h
+        src/loss.c
+        include/loss.h)
 target_include_directories(nncore PUBLIC include)
 target_link_libraries(nncore PUBLIC m)
 
@@ -28,3 +33,15 @@ add_test(NAME test_matrix COMMAND test_matrix)
 add_executable(test_activation tests/test_activation.c)
 target_link_libraries(test_activation PRIVATE nncore)
 add_test(NAME test_activation COMMAND test_activation)
+add_executable(test_layer tests/test_layer.c)
+target_link_libraries(test_layer PRIVATE nncore)
+add_test(NAME test_layer COMMAND test_layer)
+add_executable(test_network tests/test_network.c)
+target_link_libraries(test_network PRIVATE nncore)
+add_test(NAME test_network COMMAND test_network)
+add_executable(test_loss tests/test_loss.c)
+target_link_libraries(test_loss PRIVATE nncore)
+add_test(NAME test_loss COMMAND test_loss)
+add_executable(test_layer_backward tests/test_layer_backward.c)
+target_link_libraries(test_layer_backward PRIVATE nncore)
+add_test(NAME test_layer_backward COMMAND test_layer_backward)

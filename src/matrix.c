@@ -121,3 +121,36 @@ void matrix_fill_random(Matrix *m, const double min, const double max) {
         }
     }
 }
+
+// Hadamard product
+Matrix* hadamard_matrix(const Matrix *m1, const Matrix *m2) {
+    assert(m1->cols == m2->cols);
+    assert(m1->rows == m2->rows);
+    Matrix *m = create_matrix(m1->rows, m1->cols);
+    for (int i = 0; i < m1->rows; i++) {
+        for (int j = 0; j < m1->cols; j++) {
+            m->matrix[i][j] = m1->matrix[i][j] * m2->matrix[i][j];
+        }
+    }
+    return m;
+}
+
+Matrix *scale_matrix(const Matrix *m, double scale) {
+    Matrix *m1 = create_matrix(m->rows, m->cols);
+    for (int i = 0; i < m->rows; i++) {
+        for (int j = 0; j < m->cols; j++) {
+            m1->matrix[i][j] = scale * m->matrix[i][j];
+        }
+    }
+    return m1;
+}
+
+Matrix *subtract_matrix(const Matrix *m1, const Matrix *m2) {
+    Matrix *m = create_matrix(m1->rows, m1->cols);
+    for (int i = 0; i < m->rows; i++) {
+        for (int j = 0; j < m->cols; j++) {
+            m->matrix[i][j] = m1->matrix[i][j] - m2->matrix[i][j];
+        }
+    }
+    return m;
+}

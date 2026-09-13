@@ -25,6 +25,7 @@ Layer *create_layer(int input_size, int output_size, double (*activation)(double
 void free_layer(Layer *layer);
 
 Matrix *layer_forward(Layer *l, Matrix *x);
+Matrix* layer_backward(Layer *l, const Matrix *dL_da, double learning_rate);
 
 
 #endif //NEURALNETWORKINC_LAYER_H

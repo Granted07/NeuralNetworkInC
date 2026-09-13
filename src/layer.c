@@ -32,9 +32,8 @@ Layer *create_layer(int input_size, int output_size, double (*activation)(double
 void free_layer(Layer *l) {
     free_matrix(l->weights);
     free_matrix(l->bias);
-    if (l->x) free(l->x);
-    if (l->a) free(l->a);
-    if (l->z) free(l->z);
+    if (l->a) free_matrix(l->a);
+    if (l->z) free_matrix(l->z);
     free(l);
 }
 
@@ -54,4 +53,29 @@ Matrix *layer_forward(Layer *l, Matrix *x) {
     l->z = z;
     l->a = a;
     return a;
+}
+
+Matrix* layer_backward(Layer *l, const Matrix *dL_da, double learning_rate) {
+    Matrix *sigma_prime_z = matrix_apply(l->z, l->activation_derivative);
+    Matrix *dL_dz = hadamard_matrix(dL_da, sigma_prime_z);
+    free_matrix(sigma_prime_z);
+    Matrix *xt = transpose_matrix(l->x);
+    Matrix *dL_dW = multi_matrix(dL_dz, xt);
+    free_matrix(xt);
+    Matrix *ndL_dW = scale_matrix(dL_dW, learning_rate);
+    Matrix *ndL_dz = scale_matrix(dL_dz, learning_rate);
+    free_matrix(dL_dW);
+    Matrix *Wt = transpose_matrix(l->weights);
+    Matrix *dL_dx = multi_matrix(Wt, dL_dz);
+    free_matrix(Wt);
+    free_matrix(dL_dz);
+    Matrix *new_weights = subtract_matrix(l->weights, ndL_dW);
+    free_matrix(l->weights);
+    l->weights = new_weights;
+    Matrix *new_biases = subtract_matrix(l->bias, ndL_dz);
+    free_matrix(l->bias);
+    l->bias = new_biases;
+    free_matrix(ndL_dW);
+    free_matrix(ndL_dz);
+    return dL_dx;
 }
