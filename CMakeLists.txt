@@ -24,6 +24,8 @@ target_link_libraries(nncore PUBLIC m)
 # --- Apps: each is its own executable, all linking against nncore ---
 add_executable(xor apps/xor_main.c)
 target_link_libraries(xor PRIVATE nncore)
+add_executable(rps apps/rps_main.c)
+target_link_libraries(rps PRIVATE nncore)
 
 # --- Tests ---
 enable_testing()

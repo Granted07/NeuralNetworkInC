@@ -1,10 +1,7 @@
 //
 // Created by anjis on 12-09-2026.
 //
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 #include "activation.h"
 #include "loss.h"
@@ -47,7 +44,7 @@ int main() {
     );
 
     double learning_rate = 0.5;
-    int epochs = 20000;
+    int epochs = 6000;
 
     for (int epoch = 0; epoch < epochs; epoch++) {
         double total_loss = 0.0;
