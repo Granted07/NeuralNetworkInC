@@ -9,15 +9,24 @@ add_compile_options(-Wall -Wextra -Werror)
 # --- Core library: all the actual NN/math code lives here ---
 file(GLOB CORE_SOURCES "src/*.c")
 add_library(nncore STATIC ${CORE_SOURCES}
+        src/matrix.c
+        include/matrix.h
         src/activation.c
         include/activation.h
         src/layer.c
         include/layer.h
         src/network.c
         include/network.h
-        include/network.h
         src/loss.c
-        include/loss.h)
+        include/loss.h
+        src/tensor.c
+        include/tensor.h
+        src/ops.c
+        include/ops.h
+        src/optim.c
+        include/optim.h
+
+)
 target_include_directories(nncore PUBLIC include)
 target_link_libraries(nncore PUBLIC m)
 
@@ -47,3 +56,6 @@ add_test(NAME test_loss COMMAND test_loss)
 add_executable(test_layer_backward tests/test_layer_backward.c)
 target_link_libraries(test_layer_backward PRIVATE nncore)
 add_test(NAME test_layer_backward COMMAND test_layer_backward)
+add_executable(test_tensor tests/test_tensor.c)
+target_link_libraries(test_tensor PRIVATE nncore)
+add_test(NAME test_tensor COMMAND test_tensor)

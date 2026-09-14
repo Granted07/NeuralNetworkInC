@@ -1,0 +1,8 @@
+//
+// Created by anjis on 14-09-2026.
+//
+
+#ifndef NEURALNETWORKINC_OPS_H
+#define NEURALNETWORKINC_OPS_H
+
+#endif //NEURALNETWORKINC_OPS_H
